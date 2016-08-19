@@ -1,10 +1,23 @@
 {
   "version": "1.0.0-*",
-  "buildOptions": {
-    "debugType": "portable",
-    "emitEntryPoint": true
+  
+  "dependencies": {
+    "Microsoft.AspNetCore.Mvc": "1.0.0",
+    "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
+    "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
+    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0",
+    "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0",
+    "Microsoft.Extensions.Logging": "1.0.0",
+    "Microsoft.Extensions.Logging.Console": "1.0.0",
+    "Microsoft.Extensions.Logging.Debug": "1.0.0",
+    "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
+    "Newtonsoft.Json": "9.0.1",
+    "Nito.AsyncEx.Core": "1.0.0-*"
   },
-  "dependencies": {},
+  "tools": {
+  "Microsoft.DotNet.Watcher.Tools": "1.0.0-preview2-final"
+  },
   "frameworks": {
     "netcoreapp1.0": {
       "dependencies": {
@@ -16,5 +29,26 @@
       },
       "imports": "dnxcore50"
     }
+  },
+    "buildOptions": {
+    "emitEntryPoint": true,
+    "preserveCompilationContext": true
+  },
+  "runtimeOptions": {
+    "configProperties": {
+      "System.GC.Server": true
+    }
+  },
+  "publishOptions": {
+    "include": [
+      "wwwroot",
+      "web.config",
+      "appsettings.json"
+    ]
+  },
+  "scripts": {
+    "postpublish": [
+      "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%"
+    ]
   }
 }

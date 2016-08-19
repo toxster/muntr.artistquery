@@ -1,5 +1,6 @@
-﻿using System;
-using Muntr.Business;
+﻿using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Builder;
 
 namespace Muntr.Server
 {
@@ -7,8 +8,15 @@ namespace Muntr.Server
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            HelpUtils.Method1();
+            var host = new WebHostBuilder()
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseIISIntegration()
+                .UseUrls("http://*:5000")
+                .UseStartup<Startup>()
+                .Build();
+
+            host.Run();
         }
     }
 }

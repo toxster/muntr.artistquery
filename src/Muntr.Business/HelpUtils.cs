@@ -1,12 +1,20 @@
-﻿using System;
+using System;
 
-namespace Muntr.Business
+namespace Muntr.Business.Misc
 {
-    public static class HelpUtils
-    {
-        public static void Method1()
-        {    
-            Console.WriteLine("Hi form Business.");
+    public static class HelpUtils {
+        
+        public static string GetWikipediaArticleStub(string fullUrl) {
+            if (String.IsNullOrEmpty(fullUrl))
+                return String.Empty;
+                
+            var uri = new Uri(fullUrl);
+            return uri.Segments[uri.Segments.Length-1];
         }
+
+
+
     }
+
 }
+

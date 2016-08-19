@@ -3,5 +3,6 @@
 **/bin/
 **/obj/
 node_modules/*
+logs/*
 project.lock.json
 .DS_Store
