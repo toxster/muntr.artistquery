@@ -1,4 +1,6 @@
 FROM microsoft/dotnet:latest
 COPY src/Muntr.Server/bin/Debug/netcoreapp1.0/publish/ /root/
 EXPOSE 5000/tcp
+ENV APPROOT /root
+WORKDIR $APPROOT
 ENTRYPOINT dotnet /root/Muntr.Server.dll 

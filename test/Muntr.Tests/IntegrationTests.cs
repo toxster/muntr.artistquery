@@ -2,6 +2,9 @@ using System;
 using Xunit;
 using Xunit.Abstractions;
 using Muntr.Business.Misc;
+using RichardSzalay.MockHttp;
+using Muntr.Server.Core;
+using System.Net.Http;
 
 namespace Muntr.Tests
 {
@@ -25,6 +28,16 @@ namespace Muntr.Tests
         {
             var s = @"";
             Assert.Equal("", HelpUtils.GetWikipediaArticleStub(s));
+        }
+
+        [Fact]
+        public void TestParseWikipediaExtract() {
+            var mockHttp = new MockHttpMessageHandler();
+            var IOptions<AppSettings> settings = 
+            
+            var httpClient = new HttpClient(mockHttp);
+
+            var artistQueryRepository = new ArtistQueryRepository(null, )
         }
 
 

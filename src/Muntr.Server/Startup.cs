@@ -20,7 +20,6 @@ namespace Muntr.Server
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
-            Console.WriteLine("contentRoot: " + env.ContentRootPath); 
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -32,17 +31,8 @@ namespace Muntr.Server
             services.AddMvc();
 
             services.AddOptions();
-            
 
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
-
-            services.Configure<AppSettings>(appSettings =>
-    
-        
-        {
-            // Untyped Syntax - Configuration[""]
-            appSettings.CoverArtArchiveEndpointURL =  Configuration["AppSettings:CoverArtArchiveEndpointURL"];
-        });
 
             services.AddScoped<IArtistQueryRepository, ArtistQueryRepository>();
         }

@@ -5,6 +5,8 @@ namespace Muntr.Server.Interfaces
 {
     public interface IArtistQueryRepository
     {
+
+        
         ArtistQueryResponse Find(string key);
     }
 }

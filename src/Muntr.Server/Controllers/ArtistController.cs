@@ -1,3 +1,4 @@
+using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -10,16 +11,21 @@ namespace Muntr.Server.Controllers
     public class ArtistController: Controller 
     {
         private AppSettings _settings { get; set; }
-
+        private static HttpClient _httpClient;
         private readonly ILogger<ArtistController> _logger;
         private readonly IArtistQueryRepository _artistQueryRepository;
 
         public ArtistController(IArtistQueryRepository artistQueryRepository, 
-            ILogger<ArtistController> logger, IOptions<AppSettings> settings) 
+            ILogger<ArtistController> logger, IOptions<AppSettings> settings, HttpClient httpClient = null) 
         {
             this._logger = logger;
             this._artistQueryRepository = artistQueryRepository;
             this._settings = settings.Value;
+            
+            if (httpClient == null) {
+                _httpClient = new HttpClient();
+            }
+            
         }
 
 

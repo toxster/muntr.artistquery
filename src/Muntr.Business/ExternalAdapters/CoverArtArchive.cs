@@ -7,24 +7,32 @@ using Newtonsoft.Json.Linq;
 namespace Muntr.Business.ExternalAdapters
 {
     /// there is a 3rd party lib for accessing MusicBrainz, however, its not tested with dotnetcore.
-    public class CoverArtArchiveAdapter {
+    public class CoverArtArchiveAdapter
+    {
         //kMusicBrainzEndointURL = ConfigurationManager.AppSettings["MusicBrainzEndpointURL"];
         private static string kEndpointURL;
-        
-        public CoverArtArchiveAdapter(string endpointBaseUrl) {
+
+        public CoverArtArchiveAdapter(string endpointBaseUrl)
+        {
             kEndpointURL = endpointBaseUrl;
         }
 
         private static HttpClient _Client;
-        private HttpClient httpClient { get {
-            if (_Client == null)
-                _Client = new HttpClient();
-                
-            return _Client;
-        }}
+        private HttpClient httpClient
+        {
+            get
+            {
+                if (_Client == null)
+                    _Client = new HttpClient();
+
+                return _Client;
+            }
+        }
         /// Returns: Tuple of Guid, front img, thumb-large, thumb-small uris.
-        public async Task<Tuple<Guid, string, string, string>> GetCoverArtURLAsync(Guid mbid) {
-            var request = new HttpRequestMessage() {
+        public async Task<Tuple<Guid, string, string, string>> GetCoverArtURLAsync(Guid mbid)
+        {
+            var request = new HttpRequestMessage()
+            {
                 RequestUri = new Uri(String.Format(kEndpointURL, mbid.ToString().ToLower())),
                 Method = HttpMethod.Get,
             };
@@ -53,6 +61,6 @@ namespace Muntr.Business.ExternalAdapters
             }
 
 
-        } 
+        }
     }
 }

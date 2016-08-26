@@ -7,28 +7,36 @@ using Newtonsoft.Json.Linq;
 namespace Muntr.Business.ExternalAdapters
 {
     /// there is a 3rd party lib for accessing MusicBrainz, however, its not tested with dotnetcore.
-    public class MusicBrainzAdapter {
-        //kMusicBrainzEndointURL = ConfigurationManager.AppSettings["MusicBrainzEndpointURL"];
+    public class MusicBrainzAdapter
+    {
         private static string kEndpointURL;
         private static HttpClient _Client;
-        private HttpClient httpClient { get {
-            if (_Client == null)
-                _Client = new HttpClient();
-                
-            return _Client;
-        }}
-        
-        public MusicBrainzAdapter(string endpointBaseUrl) {
+        private HttpClient httpClient
+        {
+            get
+            {
+                if (_Client == null)
+                    _Client = new HttpClient();
+
+                return _Client;
+            }
+        }
+
+        public MusicBrainzAdapter(string endpointBaseUrl)
+        {
             kEndpointURL = endpointBaseUrl;
         }
 
-        public async Task<JObject> LookupAsync(string mbid) {
+        public async Task<JObject> LookupAsync(string mbid)
+        {
 
-            var request = new HttpRequestMessage() {
+            var request = new HttpRequestMessage()
+            {
                 RequestUri = new Uri(String.Format(kEndpointURL, mbid)),
                 Method = HttpMethod.Get,
             };
-            // by using a unique User-Agent string, we are throttled to 50req/s. If that limit hits we return HTTP 500 and the clients will have to handle this.
+            // by using a unique User-Agent string, we are throttled to 50req/s. 
+            // If that limit hits we return HTTP 500 and the clients will have to handle this, since 500 is a retryable error.
             request.Headers.Add("User-Agent", "MuntrArtistQuery/1.0.0 ( tobias@muntr.com )");
 
             try
@@ -46,6 +54,6 @@ namespace Muntr.Business.ExternalAdapters
             }
 
 
-        } 
+        }
     }
 }
