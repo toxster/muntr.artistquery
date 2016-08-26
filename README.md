@@ -58,7 +58,6 @@ you should now have 1 reverse proxy with 3 app servers running on localhost:80
 * Not creating proper classes for the various adapters, instead we cherrypick what we need from the returning JSON.
 * Not throwing custom exceptions out of the adapters, instead we rely on the server returning 500 to the client and that the clients acts appropriately.
 * Not testing all various errors in the 3:rd party API's (missing id, wrong format of id, etc.)
-* Not testing if its runnable from Visual Studio 2015.dis
 
 ## Examples
 
