@@ -12,7 +12,7 @@ namespace Muntr.Server
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
-                .UseUrls("http://*:5000")
+                .UseUrls("http://*:5000") // if running from within VS, and using IIS Express, have this line commented out!
                 .UseStartup<Startup>()
                 .Build();
 
